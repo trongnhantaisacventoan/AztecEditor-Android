@@ -17,19 +17,22 @@ class MarkSpan : CharacterStyle, IAztecInlineSpan {
 
         val color = CssStyleFormatter.getStyleAttribute(attributes,
             CssStyleFormatter.CSS_COLOR_ATTRIBUTE)
-        textColorValue = if (color.isNotEmpty()) {
-            Color.parseColor(color)
-        } else {
-            null
-        }
+        textColorValue = safelyParseColor(color)
     }
 
     constructor(attributes: AztecAttributes = AztecAttributes(), colorString: String?) : super() {
         this.attributes = attributes
+        textColorValue = safelyParseColor(colorString)
+    }
 
-        textColorValue = if (colorString != null) {
+    private fun safelyParseColor(colorString: String?): Int? {
+        if (colorString == null) {
+            return null
+        }
+        return try {
             Color.parseColor(colorString)
-        } else {
+        } catch (e: IllegalArgumentException) {
+            // Unknown color
             null
         }
     }

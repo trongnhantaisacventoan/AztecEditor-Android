@@ -3,6 +3,7 @@ package org.wordpress.aztec.spans
 import android.graphics.Color
 import android.text.TextPaint
 import android.text.style.CharacterStyle
+import androidx.annotation.VisibleForTesting
 import org.wordpress.aztec.AztecAttributes
 import org.wordpress.aztec.source.CssStyleFormatter
 
@@ -25,8 +26,9 @@ class MarkSpan : CharacterStyle, IAztecInlineSpan {
         textColorValue = safelyParseColor(colorString)
     }
 
-    private fun safelyParseColor(colorString: String?): Int? {
-        if (colorString == null) {
+    @VisibleForTesting
+    internal fun safelyParseColor(colorString: String?): Int? {
+        if (colorString.isNullOrBlank()) {
             return null
         }
         return try {

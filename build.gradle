@@ -80,6 +80,8 @@ ext {
     jSoupVersion = '1.11.3'
     wordpressUtilsVersion = '3.5.0'
     espressoVersion = '3.0.1'
+    mockitoVersion = '4.5.1'
+    mockitoKotlinVersion = '4.1.0'
 
     // other
     wordpressLintVersion = '2.0.0'

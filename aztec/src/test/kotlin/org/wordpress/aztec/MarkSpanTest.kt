@@ -1,17 +1,15 @@
 package org.wordpress.aztec
 
+import io.mockk.every
+import io.mockk.mockk
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.Mock
-import org.mockito.Mockito
 import org.robolectric.RobolectricTestRunner
 import org.wordpress.aztec.spans.MarkSpan
 
 @RunWith(RobolectricTestRunner::class)
 class MarkSpanTest {
-    @Mock
-    val markSpan = Mockito.mock(MarkSpan::class.java)
     /**
      * Test used to confirm two crashes related are fixed.
      *
@@ -22,8 +20,9 @@ class MarkSpanTest {
         var error = false
         var result: Int? = null
         try {
-            Mockito.`when`(markSpan.safelyParseColor("")).thenCallRealMethod()
-            result = markSpan.safelyParseColor("")
+            val span = mockk<MarkSpan>()
+            every { span.safelyParseColor("") } coAnswers { callOriginal() }
+            result = span.safelyParseColor("")
         } catch (e: Exception) {
             error = true
         }
@@ -41,8 +40,9 @@ class MarkSpanTest {
         var error = false
         var result: Int? = null
         try {
-            Mockito.`when`(markSpan.safelyParseColor(null)).thenCallRealMethod()
-            result = markSpan.safelyParseColor(null)
+            val span = mockk<MarkSpan>()
+            every { span.safelyParseColor(null) } coAnswers { callOriginal() }
+            result = span.safelyParseColor(null)
         } catch (e: Exception) {
             error = true
         }

@@ -1,11 +1,7 @@
 package org.wordpress.aztec
 
-import io.mockk.every
-import io.mockk.mockk
 import org.junit.Assert
 import org.junit.Test
-import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
 import org.wordpress.aztec.spans.MarkSpan
 
 class MarkSpanTest {

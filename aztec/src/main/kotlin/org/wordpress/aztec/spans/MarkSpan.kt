@@ -26,7 +26,7 @@ class MarkSpan : CharacterStyle, IAztecInlineSpan {
     }
 
     private fun safelyParseColor(colorString: String?): Int? {
-        if (colorString == null) {
+        if (colorString.isNullOrBlank()) {
             return null
         }
         return try {

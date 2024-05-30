@@ -17,18 +17,19 @@ abstract class AztecListSpan(override var nestingLevel: Int,
     override var startBeforeCollapse: Int = -1
 
     override fun chooseHeight(text: CharSequence, start: Int, end: Int, spanstartv: Int, v: Int, fm: Paint.FontMetricsInt) {
-        val spanned = text as Spanned
-        val spanStart = spanned.getSpanStart(this)
-        val spanEnd = spanned.getSpanEnd(this)
 
-        if (start == spanStart || start < spanStart) {
-            fm.ascent -= verticalPadding
-            fm.top -= verticalPadding
-        }
-        if (end == spanEnd || spanEnd < end) {
-            fm.descent += verticalPadding
-            fm.bottom += verticalPadding
-        }
+        val spanned = text as Spanned
+//        val spanStart = spanned.getSpanStart(this)
+//        val spanEnd = spanned.getSpanEnd(this)
+
+//        if (start == spanStart || start < spanStart) {
+//            fm.ascent -= verticalPadding
+//            fm.top -= verticalPadding
+//        }
+//        if (end == spanEnd || spanEnd < end) {
+//            fm.descent += verticalPadding
+//            fm.bottom += verticalPadding
+//        }
     }
 
     fun getIndexOfProcessedLine(text: CharSequence, end: Int): Int? {

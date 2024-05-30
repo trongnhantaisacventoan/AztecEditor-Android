@@ -492,7 +492,7 @@ open class MainActivity : AppCompatActivity(),
 
             aztec.visualEditor.setBackgroundSpanColor(ContextCompat.getColor(this, AztecR.color.blue_dark))
 
-            aztec.sourceEditor?.displayStyledAndFormattedHtml(EXAMPLE)
+//            aztec.sourceEditor?.displayStyledAndFormattedHtml(EXAMPLE)
 
             aztec.addPlugin(CssUnderlinePlugin())
             aztec.addPlugin(CssBackgroundColorPlugin())
@@ -501,7 +501,7 @@ open class MainActivity : AppCompatActivity(),
 
         if (savedInstanceState == null) {
             if (!isRunningTest) {
-                aztec.visualEditor.fromHtml(EXAMPLE)
+//                aztec.visualEditor.fromHtml(EXAMPLE)
             }
             aztec.initSourceEditorHistory()
         }

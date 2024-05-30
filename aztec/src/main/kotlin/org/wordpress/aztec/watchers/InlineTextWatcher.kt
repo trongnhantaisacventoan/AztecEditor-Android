@@ -20,6 +20,7 @@ package org.wordpress.aztec.watchers
 import android.text.Editable
 import android.text.TextWatcher
 import android.text.style.LeadingMarginSpan
+import android.util.Log
 import org.wordpress.aztec.AztecText
 import org.wordpress.aztec.formatting.InlineFormatter
 import org.wordpress.aztec.spans.IAztecInlineSpan

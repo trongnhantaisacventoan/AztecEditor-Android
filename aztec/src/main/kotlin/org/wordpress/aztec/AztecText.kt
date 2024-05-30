@@ -1281,7 +1281,8 @@ open class AztecText : AppCompatEditText, TextWatcher, UnknownHtmlSpan.OnUnknown
         if (newSelStart == 0 && newSelEnd == 0) {
             newSelEnd++
         } else if (newSelStart == newSelEnd && editableText.length > selectionStart && editableText[selectionStart - 1] == Constants.NEWLINE) {
-            newSelEnd++
+            newSelStart--
+//            newSelEnd++
         } else if (newSelStart > 0 && !isTextSelected()) {
             newSelStart--
         }

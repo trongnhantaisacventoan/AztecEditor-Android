@@ -5,6 +5,8 @@ import android.text.Spanned
 import android.text.style.BackgroundColorSpan
 import android.text.style.ForegroundColorSpan
 import android.text.style.StyleSpan
+import android.util.Log
+import android.util.Patterns
 import androidx.annotation.ColorRes
 import org.wordpress.android.util.AppLog
 import org.wordpress.aztec.AztecAttributes
@@ -16,6 +18,7 @@ import org.wordpress.aztec.ITextFormat
 import org.wordpress.aztec.R
 import org.wordpress.aztec.spans.AztecBackgroundColorSpan
 import org.wordpress.aztec.spans.AztecCodeSpan
+import org.wordpress.aztec.spans.AztecMentionSpan
 import org.wordpress.aztec.spans.AztecStrikethroughSpan
 import org.wordpress.aztec.spans.AztecStyleBoldSpan
 import org.wordpress.aztec.spans.AztecStyleCiteSpan
@@ -23,6 +26,7 @@ import org.wordpress.aztec.spans.AztecStyleEmphasisSpan
 import org.wordpress.aztec.spans.AztecStyleItalicSpan
 import org.wordpress.aztec.spans.AztecStyleSpan
 import org.wordpress.aztec.spans.AztecStyleStrongSpan
+import org.wordpress.aztec.spans.AztecURLSpan
 import org.wordpress.aztec.spans.AztecUnderlineSpan
 import org.wordpress.aztec.spans.HighlightSpan
 import org.wordpress.aztec.spans.IAztecExclusiveInlineSpan
@@ -84,11 +88,34 @@ class InlineFormatter(editor: AztecText, val codeStyle: CodeStyle, private val h
     fun handleInlineStyling(textChangedEvent: TextChangedEvent) {
         if (textChangedEvent.isEndOfBufferMarker()) return
 
+
+
+        // Auto link
+
+        Patterns.WEB_URL.toRegex().findAll(editableText).forEach {
+            val spans = editableText.getSpans(it.range.first, it.range.last, AztecURLSpan::class.java)
+            Log.v("DKM", it.range.first.toString() + " " + it.range.last);
+            if(spans == null || spans.isEmpty()) {
+                // nec ahgen to link
+                applyInlineStyle(AztecTextFormat.FORMAT_BOLD, it.range.first, it.range.last)
+            }
+        }
+
+        // Handle mention
+        val urlSpans = editableText.getSpans(0, editableText.length, AztecMentionSpan::class.java);
+        urlSpans.forEach {
+            val s = editableText.getSpanStart(it);
+            val e = editableText.getSpanEnd(it);
+            if(!it.getMentionURL().equals(editableText.subSequence(s,e))){
+                editableText.removeSpan(it);
+            }
+        }
+
         // because we use SPAN_INCLUSIVE_INCLUSIVE for inline styles
         // we need to make sure unselected styles are not applied
         clearInlineStyles(textChangedEvent.inputStart, textChangedEvent.inputEnd, textChangedEvent.isNewLine())
 
-        if (textChangedEvent.isNewLine()) return
+//        if (textChangedEvent.isNewLine()) return
 
         if (editor.formattingIsApplied()) {
             for (item in editor.selectedStyles) {
@@ -513,7 +540,8 @@ class InlineFormatter(editor: AztecText, val codeStyle: CodeStyle, private val h
                 for (span in spans) {
                     if (isSameInlineSpanType(span, spanToCheck)) {
                         builder.append(editableText.subSequence(i, i + 1).toString())
-                        break
+                        return true;
+//                        break
                     }
                 }
             }
@@ -522,6 +550,7 @@ class InlineFormatter(editor: AztecText, val codeStyle: CodeStyle, private val h
             val textOfCombinedSpans = builder.toString().replace("\n".toRegex(), "")
 
             return originalText.isNotEmpty() && originalText == textOfCombinedSpans
+
         }
     }
 

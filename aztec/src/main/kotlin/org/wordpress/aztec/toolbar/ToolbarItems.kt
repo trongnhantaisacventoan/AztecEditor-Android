@@ -54,15 +54,19 @@ sealed class ToolbarItems {
         val defaultBasicLayout = BasicLayout(
                 ToolbarAction.HEADING,
                 ToolbarAction.LIST,
+                ToolbarAction.TASK_LIST,
                 ToolbarAction.QUOTE,
                 ToolbarAction.BOLD,
                 ToolbarAction.ITALIC,
+                ToolbarAction.CODE,
                 ToolbarAction.LINK,
                 ToolbarAction.UNDERLINE,
                 ToolbarAction.STRIKETHROUGH,
                 ToolbarAction.ALIGN_LEFT,
                 ToolbarAction.ALIGN_CENTER,
                 ToolbarAction.ALIGN_RIGHT,
+                ToolbarAction.INDENT,
+                ToolbarAction.OUTDENT,
                 ToolbarAction.HORIZONTAL_RULE,
                 PLUGINS,
                 ToolbarAction.HTML
@@ -79,9 +83,11 @@ sealed class ToolbarItems {
                         ToolbarAction.ALIGN_LEFT,
                         ToolbarAction.ALIGN_CENTER,
                         ToolbarAction.ALIGN_RIGHT,
-                        ToolbarAction.HORIZONTAL_RULE,
-                        PLUGINS,
-                        ToolbarAction.HTML
+                        ToolbarAction.INDENT,
+                        ToolbarAction.OUTDENT,
+//                        ToolbarAction.HORIZONTAL_RULE,
+//                        PLUGINS,
+//                        ToolbarAction.HTML
                 ),
                 collapsedItems = mutableListOf(
                         ToolbarAction.HEADING,

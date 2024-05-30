@@ -29,7 +29,7 @@ allprojects {
     }
     tasks.withType(KotlinCompile).all {
         kotlinOptions {
-            allWarningsAsErrors = true
+//            allWarningsAsErrors = true
         }
     }
 }

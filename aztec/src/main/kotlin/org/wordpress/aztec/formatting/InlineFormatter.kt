@@ -1,6 +1,7 @@
 package org.wordpress.aztec.formatting
 
 import android.graphics.Typeface
+import android.text.Spannable
 import android.text.Spanned
 import android.text.style.BackgroundColorSpan
 import android.text.style.ForegroundColorSpan
@@ -103,21 +104,25 @@ class InlineFormatter(editor: AztecText, val codeStyle: CodeStyle, private val h
             }
         }
 
-        // Handle mention
-        val urlSpans = editableText.getSpans(0, editableText.length, AztecMentionSpan::class.java);
-        urlSpans.forEach {
-            val s = editableText.getSpanStart(it);
-            val e = editableText.getSpanEnd(it);
-            if(!it.getMentionURL().equals(editableText.subSequence(s,e))){
-                editableText.removeSpan(it);
-            }
-        }
 
         // because we use SPAN_INCLUSIVE_INCLUSIVE for inline styles
         // we need to make sure unselected styles are not applied
         clearInlineStyles(textChangedEvent.inputStart, textChangedEvent.inputEnd, textChangedEvent.isNewLine())
 
 //        if (textChangedEvent.isNewLine()) return
+
+        // Handle mention
+        val urlSpans = editableText.getSpans(0, editableText.length, AztecURLSpan::class.java);
+        urlSpans.forEach {
+            val s = editableText.getSpanStart(it);
+            val e = editableText.getSpanEnd(it);
+            if(!it.attributes.getValue("href").equals(editableText.subSequence(s,e))){
+//                editableText.removeSpan(it);
+                // example how to delete ...
+                TextDeleter.mark(textChangedEvent.text as Spannable, s,e);
+            }
+        }
+
 
         if (editor.formattingIsApplied()) {
             for (item in editor.selectedStyles) {

@@ -23,6 +23,7 @@ open class GenericBlockHandler<T : IAztecBlockSpan>(clazz: Class<T>) : BlockHand
         BlockElementWatcher.replay(text, newlineIndex)
     }
 
+    //
     override fun handleNewlineAtEmptyBody() {
         // block is empty so, remove it
         block.remove()

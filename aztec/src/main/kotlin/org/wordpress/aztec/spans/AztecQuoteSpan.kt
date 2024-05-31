@@ -96,42 +96,42 @@ open class AztecQuoteSpan(
     // this method adds extra padding to the top and bottom lines of the text while removing it from middle lines
     override fun chooseHeight(text: CharSequence, start: Int, end: Int, spanstartv: Int, v: Int,
                               fm: Paint.FontMetricsInt) {
-        val spanned = text as Spanned
-        val spanStart = spanned.getSpanStart(this)
-        val spanEnd = spanned.getSpanEnd(this)
-        val isFirstLine = start <= spanStart
-        val isLastLine = spanEnd <= end
-
-        if (isFirstLine) {
-            originalAscent = fm.ascent
-            originalTop = fm.top
-            originalDescent = fm.descent
-            originalBottom = fm.bottom
-
-            fm.ascent -= quoteStyle.verticalPadding
-            fm.top -= quoteStyle.verticalPadding
-
-            if (!isLastLine) {
-                fm.descent = originalDescent
-                fm.bottom = originalBottom
-            }
-        }
-        if (isLastLine) {
-            fm.descent += quoteStyle.verticalPadding
-            fm.bottom += quoteStyle.verticalPadding
-
-            if (!isFirstLine) {
-                fm.ascent = originalAscent
-                fm.top = originalTop
-            }
-        }
-
-        if (!isFirstLine && !isLastLine) {
-            fm.ascent = originalAscent
-            fm.top = originalTop
-            fm.descent = originalDescent
-            fm.bottom = originalBottom
-        }
+//        val spanned = text as Spanned
+//        val spanStart = spanned.getSpanStart(this)
+//        val spanEnd = spanned.getSpanEnd(this)
+//        val isFirstLine = start <= spanStart
+//        val isLastLine = spanEnd <= end
+//
+//        if (isFirstLine) {
+//            originalAscent = fm.ascent
+//            originalTop = fm.top
+//            originalDescent = fm.descent
+//            originalBottom = fm.bottom
+//
+//            fm.ascent -= quoteStyle.verticalPadding
+//            fm.top -= quoteStyle.verticalPadding
+//
+//            if (!isLastLine) {
+//                fm.descent = originalDescent
+//                fm.bottom = originalBottom
+//            }
+//        }
+//        if (isLastLine) {
+//            fm.descent += quoteStyle.verticalPadding
+//            fm.bottom += quoteStyle.verticalPadding
+//
+//            if (!isFirstLine) {
+//                fm.ascent = originalAscent
+//                fm.top = originalTop
+//            }
+//        }
+//
+//        if (!isFirstLine && !isLastLine) {
+//            fm.ascent = originalAscent
+//            fm.top = originalTop
+//            fm.descent = originalDescent
+//            fm.bottom = originalBottom
+//        }
     }
 
     override fun getLeadingMargin(first: Boolean): Int {

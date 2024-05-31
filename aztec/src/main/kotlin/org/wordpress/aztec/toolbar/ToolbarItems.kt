@@ -55,6 +55,7 @@ sealed class ToolbarItems {
                 ToolbarAction.HEADING,
                 ToolbarAction.LIST,
                 ToolbarAction.TASK_LIST,
+                ToolbarAction.PREFORMAT,
                 ToolbarAction.QUOTE,
                 ToolbarAction.BOLD,
                 ToolbarAction.ITALIC,

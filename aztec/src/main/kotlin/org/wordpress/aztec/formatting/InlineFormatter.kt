@@ -33,6 +33,7 @@ import org.wordpress.aztec.spans.IAztecExclusiveInlineSpan
 import org.wordpress.aztec.spans.IAztecInlineSpan
 import org.wordpress.aztec.spans.MarkSpan
 import org.wordpress.aztec.watchers.TextChangedEvent
+import org.wordpress.aztec.watchers.TextDeleter
 
 /**
  * <b>Important</b> - use [applySpan] to add new spans to the editor. This method will
@@ -97,6 +98,7 @@ class InlineFormatter(editor: AztecText, val codeStyle: CodeStyle, private val h
             Log.v("DKM", it.range.first.toString() + " " + it.range.last);
             if(spans == null || spans.isEmpty()) {
                 // nec ahgen to link
+
                 applyInlineStyle(AztecTextFormat.FORMAT_BOLD, it.range.first, it.range.last)
             }
         }

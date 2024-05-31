@@ -23,7 +23,10 @@ open class GenericBlockHandler<T : IAztecBlockSpan>(clazz: Class<T>) : BlockHand
         BlockElementWatcher.replay(text, newlineIndex)
     }
 
-    //
+    // Handle exit block on new line here
+    // Can change it may 2 new lines .... // need check
+    // handle2NewlineAtEmptyBody() add more function
+//    TextDeleter.mark(text, newlineIndex -1, newlineIndex + 1)
     override fun handleNewlineAtEmptyBody() {
         // block is empty so, remove it
         block.remove()
